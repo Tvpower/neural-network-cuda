@@ -17,8 +17,10 @@ int main(){
     cudaMallocManaged(&targ, (bs+1)*sizeof(float));
 
     begin = std::chrono::steady_clock::now();
+
     read_csv(inp, "../data/x.csv");
     read_csv(targ, "../data/y.csv");
+
     end = std::chrono::steady_clock::now();
     std::cout << "Data reading time: " << (std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count())/1000000.0f << std::endl;
 
@@ -32,6 +34,7 @@ int main(){
     begin = std::chrono::steady_clock::now();
     train_gpu(seq, inp, targ, bs, n_in, n_epochs);
     end = std::chrono::steady_clock::now();
+
     std::cout << "Training time: " << (std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count())/1000000.0f << std::endl;
 
     return 0;

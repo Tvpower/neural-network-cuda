@@ -2,7 +2,7 @@
 #define LINEAR_GPU_H
 
 
-#include "../utils/module.h"
+#include "../utils/module.h" // This has the forward backward and update methods
 
 
 class Linear_GPU: public Module{

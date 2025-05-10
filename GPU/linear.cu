@@ -2,8 +2,19 @@
 #include "../utils/utils.h"
 
 
+// A "linear layer" neural network performs a linear transformation on its input: Y = xw^t + b
+// this is a neural network that performs a linear transformation on its input
+/*
+ *X: input matrix (batch_size, input_features)
+ *W: weights matrix (output_features, input_features)
+ *b: Bias vector (output_features)
+ *Y: Output matrix (batch_size, output_features)
+ *
+ *The GPU implementation aims to parallelize these matrix operations operations
+ */
+
 __global__
-void linear_forward_gpu(float *inp, float *weights, float *bias, float *out, int bs, int n_in, int n_out){
+void linear_forward_gpu(float *inp, float *weights, float *bias, float *out, int bs, int n_in, int n_out){ // Chain together the series of modules passed to the constructor
     int row = blockDim.x*blockIdx.x + threadIdx.x, col = blockDim.y*blockIdx.y + threadIdx.y;
     int ind_inp, ind_weights, ind_out;
 
