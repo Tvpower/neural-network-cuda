@@ -6,7 +6,7 @@
 #include "../data/read_csv.h"
 
 
-int main(){
+int run_gpu_code(){
     std::chrono::steady_clock::time_point begin, end;
 
     int bs = 100000, n_in = 50, n_epochs = 100;
