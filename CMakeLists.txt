@@ -31,13 +31,16 @@ function(add_cuda_options target)   #This function encapsulates the CUDA-specifi
             >
         )
         set_target_properties(${target} PROPERTIES
-            CUDA_SEPARABLE_COMPILATION ON
-        )
+            CUDA_SEPARABLE_COMPILATION ON   #This enables separable compilation for CUDA code which:
+                                            #Allows for separate dynamic parallelism
+        )                                   #Makes linking more flexible
+                                            #Speeds up compilation time for large projects
         target_link_libraries(${target} ${CUDA_LIBRARIES})
     else ()
         message(WARNING "Target '${target}' not found, CUDA options not applied.")
     endif ()
 endfunction()
+#Remember Nvcc is separating host code(ran in cpu) from device code (runs on gpu)
 
 # --- Create the neural network library ---
 add_library(neural_network_lib  # Changed from add_executable to add_library
